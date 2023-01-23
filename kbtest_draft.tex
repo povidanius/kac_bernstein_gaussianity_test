@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\title{Testing gaussianity by testing independence}
+\author{Povilas Daniušis, povilas.daniusis@gmail.com}
+%\date
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+In this short paper we utilize Kac-Bernstein's characterization of Gaussian distribution for gaussianity assessment via statistical independence. We propose a simple multivariate gaussianity test, can be conducted by utilizing existing non-parametric statistical independence tests. We also conduct empirical investigation of our approach, comparing it with the recent methods.
+\end{abstract}
+
+
+\section{Introduction}
+
+
+\section{Previous work}
+
+Since gaussian distribution plays central role in statistics and probability, various approaches have beed proposed to test statistical hypothesis whether the data is gaussian(e.g.~\cite{ebner}).
+
+\section{Proposed method}
+Kac-Bernstein theorem is one of the earliest so-called characterization theorems in probability theory. It characterises Gaussian distribution in terms of independence structure of four random vectors~\cite{ref1}.
+
+\begin{theorem}
+\label{thm:KacBernstein}
+Let $X \perp Y$ are two random vectors with equal means and covariances. Then $X-Y \perp X + Y$ if and only if $X$ and $Y$ are Gaussian.
+\end{theorem}
+\begin{proof}
+Sufficiency follows from entropy power inequality~\cite{ref1}. On the other side, if $X$ and $Y$ are gaussian, the independence of $X-Y$ and $X + Y$ follows from uncorelatedness: $\Sigma_{X-Y,X+Y} = \mathbf{E} (X-Y)(X+Y)^{T} - \mathbf{E} (X-Y) \mathbf{E} (X+Y)^{T}= 0$.
+\end{proof}
+
+\noindent In this work we focus on statistical hypothesis 
+
+\begin{equation}
+\label{eq:main_problem}
+H_{0}: P_{X} = \mathcal N(.,.) \textnormal{ vs. }  H_{1}: P_{X} \neq \mathcal N(.,.).
+\end{equation}
+
+
+Let use denote two independent random vectors distributed according to $P_{X}$ by $X^{1}$ and $X^{2}$, respectively. Since they satisfy conditions of Theorem~\ref{thm:KacBernstein}, statistical hypothesis~\ref{eq:main_problem} can be reformulated as
+
+\begin{equation}
+H_{0}: P_{X} = X^{1}-X^{2} \perp X^{1} + X^{2}  \textnormal{ vs. } H_{1}:  X^{1}-X^{2} \not \perp X^{1} + X^{2},
+\end{equation}
+
+\noindent which can be solved by applying arbitrary non-parametric statistical independence tests, e.g.~\cite{ref2, hsic}.
+
+\begin{algorithm}
+\label{algo:kbtest}
+\caption{Normality test}\label{alg:cap}
+\begin{algorithmic}
+\Require Statistical independence test $T$.
+%\Ensure $y = x^n$
+\State Sample $2n$ i.i.d. samples from $P_{x}$: $X^{1} := x_{1},...,x_{n}$, and $X^{2} := x_{n+1},...,.x_{2n}$.
+\State Return $p-value$ of statistical independence test $T$ between $X^{1} - X^{2}$ and $X^{1}  + X^{2}$. 
+\end{algorithmic}
+\end{algorithm}
+
+\section{Simulations}
+
+\section{Conclusion}
+
+
+\begin{thebibliography}{9}
+\bibitem{ref1}
+https://arxiv.org/abs/2202.06005
+\bibitem{ref2}
+https://arxiv.org/pdf/0803.4101.pdf
+\bibitem{hsic}
+https://proceedings.neurips.cc/paper/2007/file/d5cfead94f5350c12c322b5b664544c1-Paper.pdf
+\bibitem{ebner}
+Ebner, B., Henze, N. Tests for multivariate normality—a critical review with emphasis on weighted $L_{2}$-statistics. TEST 29, 845–892 (2020). https://doi.org/10.1007/s11749-020-00740-0
+
+\end{thebibliography}
+\end{document}
