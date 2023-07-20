@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-dims = np.load('./dims_normal.npy')
-rezults = np.load('./rezults_normal.npy')
+dims = np.load('./rez/dims_normal.npy')
+rezults = np.load('./rez/rezults_normal.npy')
 
 
 
@@ -21,8 +21,8 @@ for d,rez in zip(dims, rezults):
     stds_hz.append(std[3])
     #print("{} {} {}".format(d, mn[0], mn[2]))
 
-dims = np.load('./dims.npy')
-rezults = np.load('./rezults.npy')
+dims = np.load('./rez/dims_5000.npy')
+rezults = np.load('./rez/rezults_5000.npy')
 rezults_kb1 = []
 rezults_hz1 = []
 stds_kb1 = []

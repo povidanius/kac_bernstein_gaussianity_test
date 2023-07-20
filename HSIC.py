@@ -60,7 +60,7 @@ def hsic_gam(X, Y, alph = 0.5):
 	dists = dists - np.tril(dists)
 	dists = dists.reshape(n**2, 1)
 
-	width_x = np.sqrt( 0.5 * np.median(dists[dists>0]) )
+	width_x = 0.5 * np.sqrt( 0.5 * np.median(dists[dists>0]) )
 	# ----- -----
 
 	# ----- width of X -----
@@ -74,7 +74,7 @@ def hsic_gam(X, Y, alph = 0.5):
 	dists = dists - np.tril(dists)
 	dists = dists.reshape(n**2, 1)
 
-	width_y = np.sqrt( 0.5 * np.median(dists[dists>0]) )
+	width_y = 0.5 * np.sqrt( 0.5 * np.median(dists[dists>0]) )
 	# ----- -----
 
 	bone = np.ones((n, 1), dtype = float)
