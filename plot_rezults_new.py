@@ -23,18 +23,19 @@ def nice_plot(data_1, data_2):
     plt.show()    
 
 
-distributions = ['chisquare1', 'chisquare2', 'uniform01', 'uniform-11', 'laplace', 'logistic01', 'logistic02', 'power2', 'beta82', 'beta55', 'beta28', 'cauchy', 'mixture']
+#distributions = ['chisquare1', 'chisquare2', 'uniform01', 'uniform-11', 'laplace', 'logistic01', 'logistic02', 'power2', 'beta82', 'beta55', 'beta28', 'cauchy', 'mixture']
 #uniform01
 #uniform-11
 #
 #distributions = ['uniform01']
+distributions = ['g0','g1','g2','g3']
 
 dims = range(50,160,10)
-num_samples = 1000
+num_samples = 5000
 
 rez = []
 for distribution in distributions:
-    file_name = './rez/rezults_{}_{}.npy'.format(distribution, num_samples)
+    file_name = './rez_g/rezults_{}_{}.npy'.format(distribution, num_samples)
     x = np.load(file_name)
     if rez == []:
         rez = x
@@ -51,10 +52,10 @@ for dim in dims:
     mn = np.mean(rez[ind,...][0],axis=0)
     std = np.std(rez[ind,...][0],axis=0)   
 
-    rezults_kb1.append(mn[0])
-    rezults_hz1.append(mn[2])
-    stds_kb1.append(std[0])
-    stds_hz1.append(std[2])
+    rezults_kb1.append(mn[1])
+    rezults_hz1.append(mn[3])
+    stds_kb1.append(std[1])
+    stds_hz1.append(std[3])
 
 """
 fig, ax = plt.subplots()
